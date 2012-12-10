@@ -7,6 +7,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,11 +35,12 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 	public PlayerFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PlayerFrame.class.getResource("/images/video_player.png")));
 		addComponentListener(this);
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				initComponent();
-			};
+			}
 		});
 	}
 
@@ -70,7 +72,7 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 		}
 
 		playerPanel = player.getPlayerPanel();
-
+		
 		Playlist playList = new Playlist(player, playlistModel);
 		player.addPlayListListenerToControlPanel(playList);
 		JScrollPane spPlayList = new JScrollPane(playList);

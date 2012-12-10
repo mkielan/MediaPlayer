@@ -8,24 +8,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+
+import pl.wat.edu.pl.pw.MediaPlayer.other.Formatter;
 
 public class TimePanel extends JPanel {
 	protected JLabel currentTime;
 	protected JLabel totalTime;
 	
 	protected TimeSlider timeSlider;
+	protected TimeSliderModel model;
 	
 	protected MediaPlayer player;
-	
-	private ChangeListener changeListener = null;
 	
 	public TimePanel() {
 		super(new BorderLayout());
 		currentTime = new JLabel();
 		totalTime = new JLabel();
 		timeSlider = new TimeSlider();
+		model = timeSlider.getModel();
+		
 		
 		startView();
 		setTimeLabelsVisible(false);
@@ -38,35 +39,15 @@ public class TimePanel extends JPanel {
 	protected void startView() {
 		currentTime.setText("00:00");
 		totalTime.setText("00:00");
-		timeSlider.setDefault();
+		timeSlider.getModel().setDefault();
 	}
 	
 	public void adjustToPlayer(final MediaPlayer player) {
 		this.player = player;
+		timeSlider.getModel().adjustToPlayer(player);
 		
-		timeSlider.adjustToPlayer(player);
 		totalTime.setText(Formatter.getFormatDuration(player.getTotalDuration()));
 		currentTime.setText(Formatter.getFormatDuration(player.getCurrentTime()));
-		
-		if(changeListener != null) {
-			timeSlider.removeChangeListener(changeListener);
-			changeListener = null;
-			System.gc();
-		}
-		changeListener = new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if (!timeSlider.getValueIsAdjusting()) {					
-					
-					currentTime.setText(Formatter.getFormatDuration(player.getCurrentTime()
-							.toMillis()));
-					timeSlider.setToolTipText(Formatter.getComparisonTimeString(player
-							.getCurrentTime().toMillis(), player.getTotalDuration()
-							.toMillis()));
-				}
-			}
-		};
-		timeSlider.addChangeListener(changeListener);
 	}
 	
 	public void setTimeLabelsVisible(boolean visible) {
@@ -80,9 +61,11 @@ public class TimePanel extends JPanel {
 			timeSlider.update();
 		}
 		catch (NullPointerException exc){
-			timeSlider.setDefault();
+			timeSlider.getModel().setDefault();
 		}
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
