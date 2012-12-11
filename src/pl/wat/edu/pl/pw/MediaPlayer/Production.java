@@ -3,7 +3,7 @@ package pl.wat.edu.pl.pw.MediaPlayer;
 import java.io.File;
 import java.net.URI;
 
-import pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider.Formatter;
+import pl.wat.edu.pl.pw.MediaPlayer.other.Formatter;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
