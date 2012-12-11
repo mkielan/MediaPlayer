@@ -2,6 +2,8 @@ package pl.wat.edu.pl.pw.MediaPlayer.gui.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,7 +15,7 @@ import javax.swing.JTextField;
 
 import pl.wat.edu.pl.pw.MediaPlayer.gui.LastFmWindow;
 
-public class LFMPasswordPanel extends JDialog implements ActionListener {
+public class LFMPasswordPanel extends JDialog implements ActionListener, KeyListener {
 	
 	private JTextField userTextField;
 	private JPasswordField userPasswordField;
@@ -63,7 +65,7 @@ public class LFMPasswordPanel extends JDialog implements ActionListener {
 		okButton.setBounds(115, 130, 85, 20);
 		
 		okButton.addActionListener(this);
-		
+
 	}
 
 
@@ -87,6 +89,30 @@ public class LFMPasswordPanel extends JDialog implements ActionListener {
 	
 	public void setFocus(){
 		userTextField.requestFocusInWindow();
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if( e.getKeyCode() == KeyEvent.VK_ENTER ){
+			LastFmWindow.setLogged(true);
+			
+			System.out.println("ccc");
+			this.setVisible(false);
+			owner.repaint();
+		}
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
 	}
 
 }
