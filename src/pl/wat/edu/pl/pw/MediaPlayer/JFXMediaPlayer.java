@@ -3,6 +3,8 @@ package pl.wat.edu.pl.pw.MediaPlayer;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -39,16 +41,34 @@ public class JFXMediaPlayer {
 	protected JFXPanel fxPanel;
 	protected JPanel playerPanel;
 	
+	private ReentrantLock lock = new ReentrantLock();
+	private Condition con = lock.newCondition();
+	
 	public JFXMediaPlayer() {
 		init();
+		
 		
 		Platform.runLater(new Runnable() {
             @Override
             public void run() {
+            	lock.lock();
             	initScene();
-            	playlistModel.loadFromDB();
+				playlistModel.loadFromDB();
+				con.signal();
+            	lock.unlock();
+            	
             }
 		});
+		
+		//blokada dopóki nie sk¹ñczy inicjowanie sceny
+		//i ³adowanie danych z bazy na start
+		lock.lock();
+		try {
+			con.await();
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		lock.unlock();
 	}
 	
 	public JFXMediaPlayer(PlayListModel playlistModel) {
@@ -101,6 +121,7 @@ public class JFXMediaPlayer {
 			mediaPlayer.setMute(mute);
 			
 			mediaPlayer.play();
+			
 			setPlaying(true);
 		}
 		catch (NullPointerException exc) {

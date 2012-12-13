@@ -7,7 +7,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,30 +32,38 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 	
 	private Dimension size = new Dimension(600, 400);
 	protected static final Dimension minimumSize = new Dimension(500, 300);
+	
+	private ReentrantLock lock = new ReentrantLock();
+	private Condition con = lock.newCondition();
 
 	public PlayerFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PlayerFrame.class.getResource("/images/video_player.png")));
-		addComponentListener(this);
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				initComponent();
-			}
-		});
+		this(null);
 	}
 
 	public PlayerFrame(JFXMediaPlayer mediaPlayer) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PlayerFrame.class.getResource("/images/video_player.png")));
 		addComponentListener(this);
-		this.player = mediaPlayer;
+		player = mediaPlayer;
 
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				lock.lock();
+
 				initComponent();
+				con.signal();
+            	lock.unlock();
 			};
 		});
+		
+		//blokada dopóki nie sk¹ñczy inicjowanie Componentu
+		lock.lock();
+		try {
+			con.await();
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		lock.unlock();
 	}
 
 	protected void initComponent() {
