@@ -62,7 +62,7 @@ public class LastFmWindow extends JFrame implements ActionListener{
 	private void unLoggedGUI() {
 		setLayout(null);
 		panel = new JPanel();
-		panel.setBackground(Color.white);
+		panel.setBackground(getBackground().brighter());
 		panel.setLayout(null);
 		add(panel);
 		
