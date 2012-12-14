@@ -63,18 +63,16 @@ public class TimeSliderModel {
 		}
 	}
 	
-	public void fireStateChanged() {
-		ChangeEvent event = new ChangeEvent(this);
-		
+	public void fireStateChanged() {		
 		for (ChangeListener it : getChangeListeners()) {
+			ChangeEvent event = new ChangeEvent(this);
 			it.stateChanged(event);				
 		}
 	}
 	
-	public void fireStateUpdated() {
-		ChangeEvent event = new ChangeEvent(this);
-		
+	public void fireStateUpdated() {		
 		for (ChangeListener it : getUpdateListeners()) {
+			ChangeEvent event = new ChangeEvent(this);
 			it.stateChanged(event);				
 		}
 	}
