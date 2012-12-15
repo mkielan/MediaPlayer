@@ -1,4 +1,4 @@
-package pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider;
+ package pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider;
 
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;

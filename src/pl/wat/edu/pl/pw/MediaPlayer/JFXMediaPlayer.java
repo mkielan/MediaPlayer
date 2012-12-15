@@ -30,7 +30,7 @@ public class JFXMediaPlayer {
 	protected Scene scene = null;
 	protected MediaPlayer mediaPlayer = null;
 	protected MediaView mediaView = null;
-	protected boolean playing;
+	protected boolean playing = false;
 	protected boolean mute;
 	protected boolean repeat;
 	protected double volumeLevel;
@@ -130,6 +130,9 @@ public class JFXMediaPlayer {
 				mediaPlayer = playlistModel.play(0);
 				
 				adjustNewPlayer();
+				
+				mediaPlayer.play();
+				setPlaying(true);
 			}
 		}
 	}
@@ -184,6 +187,9 @@ public class JFXMediaPlayer {
 			mediaPlayer = playlistModel.play(i);
 			
 			adjustNewPlayer();
+			
+			mediaPlayer.play();
+			setPlaying(true);
 		}
 		catch(NullPointerException exc) {
 			setNoPlayingState();
@@ -229,7 +235,6 @@ public class JFXMediaPlayer {
 	 */
 	public void setMute(boolean mute) {
 		this.mute = mute;
-		//TODO property.setPlayerMute(mute);
 		try {
 			mediaPlayer.setMute(mute);
 		}
@@ -250,7 +255,6 @@ public class JFXMediaPlayer {
 	 */
 	public void setVolume(double volume) {
 		volumeLevel = volume;
-		//TODO property.setPlayerVolumeLevel(volume);
 		try {
 			mediaPlayer.setVolume(volumeLevel);
 		}
@@ -333,9 +337,10 @@ public class JFXMediaPlayer {
 		mediaPlayer.setVolume(volumeLevel);
 		mediaPlayer.setOnEndOfMedia(new OnEndOfMedia(this));
 		mediaPlayer.currentTimeProperty().addListener(new ChangeTimeListener(controlPanel.getTimePanel()));
-		if(playing) mediaPlayer.play();
-		
-		setPlaying(true);
+		if(playing) {
+			mediaPlayer.play();
+			setPlaying(true);
+		}
 	}
 	
 	class OnEndOfMedia implements Runnable {

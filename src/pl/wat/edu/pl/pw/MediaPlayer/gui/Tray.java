@@ -1,10 +1,21 @@
 package pl.wat.edu.pl.pw.MediaPlayer.gui;
 
-import java.awt.*;
-
-import java.awt.event.*;
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.Menu;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import pl.wat.edu.pl.pw.MediaPlayer.JFXMediaPlayer;
 import pl.wat.edu.pl.pw.MediaPlayer.other.Property;
@@ -241,10 +252,8 @@ public class Tray {
 		}
 	}
 
-	// http://docs.oracle.com/javase/tutorial/uiswing/misc/systemtray.html
 	public static void main(String[] args) {
 		/* Use an appropriate Look and Feel */
-		
 			try {
 				UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 			} catch (ClassNotFoundException | InstantiationException
@@ -254,8 +263,7 @@ public class Tray {
 
 		/* Turn off metal's use of bold fonts */
 		UIManager.put("swing.boldMetal", Boolean.FALSE);
-		// Schedule a job for the event-dispatching thread:
-		// adding TrayIcon.
+		
 		SwingUtilities.invokeLater(new Runnable() {
 
 			public void run() {
