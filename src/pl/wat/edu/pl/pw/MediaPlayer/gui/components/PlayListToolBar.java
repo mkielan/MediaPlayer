@@ -14,7 +14,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import pl.wat.edu.pl.pw.MediaPlayer.Playlist;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.LastFmWindow;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.PlayerFrame;
 

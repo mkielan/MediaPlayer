@@ -12,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -19,9 +20,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import pl.wat.edu.pl.pw.MediaPlayer.JFXMediaPlayer;
-import pl.wat.edu.pl.pw.MediaPlayer.PlayListModel;
-import pl.wat.edu.pl.pw.MediaPlayer.Playlist;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListModel;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListToolBar;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.Playlist;
 
 public class PlayerFrame extends JFrame implements ComponentListener {
 
@@ -87,6 +88,7 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 		Playlist playList = new Playlist(player, playlistModel);
 		player.addPlayListListenerToControlPanel(playList);
 		JScrollPane spPlayList = new JScrollPane(playList);
+		spPlayList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		playListPanel = new JPanel(new BorderLayout());
 		playListPanel.add(spPlayList, BorderLayout.CENTER);

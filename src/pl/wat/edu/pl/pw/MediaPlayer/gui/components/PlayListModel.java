@@ -1,4 +1,4 @@
-package pl.wat.edu.pl.pw.MediaPlayer;
+package pl.wat.edu.pl.pw.MediaPlayer.gui.components;
 
 import java.io.File;
 import java.net.URI;
@@ -9,6 +9,7 @@ import javafx.scene.media.MediaPlayer;
 
 import javax.swing.DefaultListModel;
 
+import pl.wat.edu.pl.pw.MediaPlayer.Production;
 import pl.wat.edu.pl.pw.MediaPlayer.other.SQLiteConnection;
 
 /**
