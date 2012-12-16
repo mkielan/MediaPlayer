@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import pl.wat.edu.pl.pw.MediaPlayer.JFXMediaPlayer;
-import pl.wat.edu.pl.pw.MediaPlayer.Playlist;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider.TimePanel;
 
 /**Panel to control media player. 

@@ -1,4 +1,4 @@
-package pl.wat.edu.pl.pw.MediaPlayer;
+package pl.wat.edu.pl.pw.MediaPlayer.gui.components;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -13,6 +13,9 @@ import javafx.scene.media.MediaPlayer;
 
 import javax.swing.JList;
 
+import pl.wat.edu.pl.pw.MediaPlayer.JFXMediaPlayer;
+import pl.wat.edu.pl.pw.MediaPlayer.Production;
+
 /**
  * 
  * @author Mariusz Kielan
@@ -24,6 +27,7 @@ public class Playlist extends JList<Production> implements MouseListener, MouseM
 	
 	public Playlist(JFXMediaPlayer player) {
 		super(new PlayListModel());
+		setCellRenderer(new PlayListCellRenderer());
 		this.player = player;
 		listModel = new PlayListModel();
 
@@ -33,6 +37,7 @@ public class Playlist extends JList<Production> implements MouseListener, MouseM
 	
 	public Playlist(JFXMediaPlayer player, PlayListModel model) {
 		super(model);
+		setCellRenderer(new PlayListCellRenderer());
 		this.player = player;
 		listModel = model;		
 

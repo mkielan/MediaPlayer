@@ -19,6 +19,8 @@ import javafx.scene.paint.Color;
 import javax.swing.JPanel;
 
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.ControlPanel;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListModel;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.Playlist;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider.TimePanel;
 import pl.wat.edu.pl.pw.MediaPlayer.other.Property;
 

@@ -7,6 +7,7 @@ import pl.wat.edu.pl.pw.MediaPlayer.other.Formatter;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /** Media file to play.
  *  @author Mariusz Kielan
@@ -50,10 +51,12 @@ public class Production {
 	}
 	
 	public String toString() {
-		return "<html><table><tr><td style=\"float : left;\">" + getFormatName() + "</td>"
-				+ "<td style=\"float : right;\">"
-				+ Formatter.getFormatDuration(mediaPlayer.getTotalDuration())
-				+ "</td></tr></table></html>";
+		return file.getName()
+				+ Formatter.getFormatDuration(mediaPlayer.getTotalDuration());
+	}
+	
+	public Duration getTotalDuraton() {
+		return mediaPlayer.getTotalDuration();
 	}
 	
 	public boolean equals(Object obj) {
