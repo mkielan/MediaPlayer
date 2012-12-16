@@ -24,6 +24,8 @@ import pl.wat.edu.pl.pw.MediaPlayer.Playlist;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListToolBar;
 
 public class PlayerFrame extends JFrame implements ComponentListener {
+
+	private static final long serialVersionUID = 1L;
 	protected JSplitPane mainSplitPanel;
 	protected JPanel playerPanel;
 	protected JPanel playListPanel;
