@@ -1,5 +1,7 @@
 package pl.wat.edu.pl.pw.MediaPlayer.gui.components;
 
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,7 +17,7 @@ import javax.swing.JTextField;
 
 import pl.wat.edu.pl.pw.MediaPlayer.gui.LastFmWindow;
 
-public class LFMPasswordPanel extends JDialog implements ActionListener, KeyListener {
+public class LFMPasswordPanel extends JDialog {
 	
 	private JTextField userTextField;
 	private JPasswordField userPasswordField;
@@ -36,12 +38,10 @@ public class LFMPasswordPanel extends JDialog implements ActionListener, KeyList
 		setSize(300, 220);
 		setLocationRelativeTo(null);
 		setLayout(null);
-
 		
 		textWelcome = new JLabel("Please login to your Last.fm account");
 		add(textWelcome);
 		textWelcome.setBounds(10, 3, 360, 40);
-		
 		
 		textNICK = new JLabel("Nick:");
 		add(textNICK);
@@ -50,7 +50,6 @@ public class LFMPasswordPanel extends JDialog implements ActionListener, KeyList
 		userTextField = new JTextField();
 		add(userTextField);
 		userTextField.setBounds(100, 45, 100, 30);
-		
 		
 		textPASSWORD = new JLabel("Password:");
 		add(textPASSWORD);
@@ -64,20 +63,34 @@ public class LFMPasswordPanel extends JDialog implements ActionListener, KeyList
 		add(okButton);
 		okButton.setBounds(115, 130, 85, 20);
 		
-		okButton.addActionListener(this);
-
+		okButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ok();
+			}
+		});
+		
+		KeyboardFocusManager  
+	    .getCurrentKeyboardFocusManager()  
+	    .addKeyEventDispatcher(new KeyEventDispatcher() {  
+	    public boolean dispatchKeyEvent(KeyEvent e) {  
+	        boolean keyHandled = false;  
+	        if (e.getID() == KeyEvent.KEY_PRESSED) {  
+	            if (e.getKeyCode() == KeyEvent.VK_ENTER) {  
+	                ok();  
+	                keyHandled = true;  
+	            }  
+	        }  
+	        return keyHandled;  
+	    }  
+	}); 
+		
 	}
 
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		LastFmWindow.setLogged(true);
-		System.out.println(getUser());
+	private void ok(){
 		this.setVisible(false);
-		owner.repaint();
 	}
-
 	
 	public String getUser(){
 		return userTextField.getText();
@@ -90,29 +103,5 @@ public class LFMPasswordPanel extends JDialog implements ActionListener, KeyList
 	public void setFocus(){
 		userTextField.requestFocusInWindow();
 	}
-
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-
-	}
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if( e.getKeyCode() == KeyEvent.VK_ENTER ){
-			LastFmWindow.setLogged(true);
-			
-			System.out.println("ccc");
-			this.setVisible(false);
-			owner.repaint();
-		}
-	}
-
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
-
+	
 }

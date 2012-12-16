@@ -1,6 +1,5 @@
 package pl.wat.edu.pl.pw.MediaPlayer.gui;
 
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import javax.swing.Timer;
 
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.LFMPasswordPanel;
@@ -23,8 +21,8 @@ import pl.wat.edu.pl.pw.MediaPlayer.other.OpenBrowser;
 
 public class LastFmWindow extends JFrame implements ActionListener{
 
+	private static final long serialVersionUID = 1L;
 	LFMPasswordPanel passwordPanel;
-	private int skinID = 3;
 	LastFmApi lastFmApi;
 	private JButton loginButton, nextEventButton;
 	static boolean logged = false;
@@ -40,12 +38,8 @@ public class LastFmWindow extends JFrame implements ActionListener{
 	public LastFmWindow(PlayerFrame frame) {
 		initLFMGui();
 		lastFmApi = new LastFmApi();
-		skinID = frame.getSkinID();
 		this.setVisible(true);
-	}
-
-	public static void setLogged(boolean logged2) {
-		logged = logged2;
+		setResizable(false);
 	}
 
 	public void initLFMGui(){
@@ -55,7 +49,6 @@ public class LastFmWindow extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setFocusable(true);
 		unLoggedGUI();
-		
 	}
 
 
@@ -157,21 +150,15 @@ public class LastFmWindow extends JFrame implements ActionListener{
 				t9.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				
 			}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
 			
 			@Override
-			public void mousePressed(MouseEvent arg0) {
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				
-			}
+			public void mouseExited(MouseEvent arg0) {}
 			
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				t9.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				
 			}
 			
 			@Override
@@ -198,7 +185,6 @@ public class LastFmWindow extends JFrame implements ActionListener{
 				loggedGUIPart2();
 			}
 		}); 
-		
 		timer.start();
 	}
 }
