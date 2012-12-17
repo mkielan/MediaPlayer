@@ -6,10 +6,13 @@ public class Formatter {
 
 	public static String getFormatDuration(double millis) {		
 		int second = (int) (millis / 1000) % 60;
-		int minutes = (int) (millis / (1000 * 60));
+		int minutes = (int) (millis / (1000 * 60)) % 60;
+		int hours = (int) (millis / (1000 * 60)) / 60;
 		
-		if(minutes < 10) return String.format("%2d:%02d", minutes, second);
-		else return String.format("%02d:%02d", minutes, second);
+		if(minutes < 10 && hours <= 0) return String.format("%2d:%02d", minutes, second);
+		else if( hours <= 0) return String.format("%02d:%02d", minutes, second);
+		else if( hours < 10) return String.format("%2d:%02d:%02d", hours, minutes, second);
+		else return String.format("%2d:%02d:%02d", hours, minutes, second);
 	}
 	
 	public static String getFormatDuration(Duration duration) {

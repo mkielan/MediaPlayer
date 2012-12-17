@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import pl.wat.edu.pl.pw.MediaPlayer.JFXMediaPlayer;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList.PlayList;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider.TimePanel;
 
 /**Panel to control media player. 
@@ -128,7 +129,7 @@ public class ControlPanel extends JPanel {
 		this.add(other, BorderLayout.LINE_END);
 	}	
 	
-	public void addPlayListListener(Playlist playlist) {
+	public void addPlayListListener(PlayList playlist) {
 		nextButton.addActionListener(playlist);
 		prevButton.addActionListener(playlist);
 		playButton.addActionListener(playlist);
