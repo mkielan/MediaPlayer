@@ -1,7 +1,8 @@
-package pl.wat.edu.pl.pw.MediaPlayer.gui.components;
+package pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.DefaultListCellRenderer;
@@ -30,7 +31,8 @@ public class PlayListCellRenderer extends DefaultListCellRenderer {
 		
 		JLabel timeLabel = new JLabel(Formatter.getFormatDuration(prod.getTotalDuraton()));
 		timeLabel.setBackground(label.getBackground());
-		
+		label.setPreferredSize(new Dimension(100, 20));
+		//timeLabel.setMinimumSize(new Dimension(50, 20));
 		timeLabel.setOpaque(true);
 		listCell.add(timeLabel, BorderLayout.LINE_END);
 		

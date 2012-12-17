@@ -19,8 +19,8 @@ import javafx.scene.paint.Color;
 import javax.swing.JPanel;
 
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.ControlPanel;
-import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListModel;
-import pl.wat.edu.pl.pw.MediaPlayer.gui.components.Playlist;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList.PlayList;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList.PlayListModel;
 import pl.wat.edu.pl.pw.MediaPlayer.gui.components.TimeSlider.TimePanel;
 import pl.wat.edu.pl.pw.MediaPlayer.other.Property;
 
@@ -296,7 +296,7 @@ public class JFXMediaPlayer {
 		return controlPanel;
 	}
 	
-	public void addPlayListListenerToControlPanel(Playlist playlist) {
+	public void addPlayListListenerToControlPanel(PlayList playlist) {
 		controlPanel.addPlayListListener(playlist);
 	}
 	

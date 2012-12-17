@@ -54,7 +54,7 @@ public class PlayerKit extends JToolBar {
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 1) {
 					volumePopup.show(e.getComponent()
-							, e.getComponent().getX() + 30
+							, e.getComponent().getX()// + 30
 							, e.getComponent().getY()
 								+ e.getComponent().getHeight()
 								- 30);
