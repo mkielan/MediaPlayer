@@ -12,7 +12,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -20,13 +19,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import pl.wat.edu.pl.pw.MediaPlayer.JFXMediaPlayer;
-import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListModel;
-import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayListToolBar;
-import pl.wat.edu.pl.pw.MediaPlayer.gui.components.Playlist;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList.PlayList;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList.PlayListModel;
+import pl.wat.edu.pl.pw.MediaPlayer.gui.components.PlayList.PlayListToolBar;
 
 public class PlayerFrame extends JFrame implements ComponentListener {
-
-	private static final long serialVersionUID = 1L;
 	protected JSplitPane mainSplitPanel;
 	protected JPanel playerPanel;
 	protected JPanel playListPanel;
@@ -85,13 +82,11 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 
 		playerPanel = player.getPlayerPanel();
 		
-		Playlist playList = new Playlist(player, playlistModel);
+		PlayList playList = new PlayList(player, playlistModel);
 		player.addPlayListListenerToControlPanel(playList);
-		JScrollPane spPlayList = new JScrollPane(playList);
-		spPlayList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		playListPanel = new JPanel(new BorderLayout());
-		playListPanel.add(spPlayList, BorderLayout.CENTER);
+		playListPanel.add(playList, BorderLayout.CENTER);
 
 		playListPanel.add(new PlayListToolBar(playList, this), BorderLayout.PAGE_END);
 
@@ -158,8 +153,8 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 				+ d);
 		
 		size = this.getSize();
-		
-		if(player.isSetMediaView())player.changeSizeMediaView();
+		//((JList)playListPanel.getComponent(0)).setSize(new Dimension(getSize().width - d, getSize().height));
+		if(player.isSetMediaView()) player.changeSizeMediaView();
 	}
 
 	public static void main(String[] args) {
