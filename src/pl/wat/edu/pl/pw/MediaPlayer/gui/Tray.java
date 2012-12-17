@@ -81,7 +81,7 @@ public class Tray {
 		chooseSkin.add(skin5);
 		//popup.add(addFileItem);		
 		//popup.addSeparator();
-		popup.add(displayMenu);
+		//popup.add(displayMenu);
 		
 		displayMenu.add(errorItem);
 		displayMenu.add(warningItem);
@@ -230,6 +230,8 @@ public class Tray {
 		noneItem.addActionListener(listener);
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mediaPlayer.stop();
+				frame.setVisible(false);
 				tray.remove(trayIcon);
 				Property prop = new Property();
 				prop.setPlayerMute(mediaPlayer.isMute());
@@ -241,6 +243,8 @@ public class Tray {
 		});
 	}
 
+
+	
 	// Obtain the image URL
 	protected static Image createImage(String path, String description) {
 		URL imageURL = Tray.class.getResource(path);
