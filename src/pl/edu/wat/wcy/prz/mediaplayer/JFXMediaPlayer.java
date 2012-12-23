@@ -3,6 +3,8 @@ package pl.edu.wat.wcy.prz.mediaplayer;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -94,6 +96,32 @@ public class JFXMediaPlayer {
 		
 		playerPanel.add(fxPanel);
 		playerPanel.add(controlPanel, BorderLayout.SOUTH);
+		playerPanel.addComponentListener(new ComponentListener() {
+			
+			@Override
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentResized(ComponentEvent e) {
+				changeSizeMediaView();
+				
+			}
+			
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	private void initScene() {

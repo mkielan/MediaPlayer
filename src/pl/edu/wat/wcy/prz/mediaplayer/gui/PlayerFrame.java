@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -93,12 +91,6 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 		mainSplitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, playerPanel, playListPanel);
 		mainSplitPanel.setSize(600, 300);
 		mainSplitPanel.setDividerLocation(420);
-		mainSplitPanel.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				if(player.isSetMediaView()) player.changeSizeMediaView();
-			}
-		});
 		
 		this.setContentPane(mainSplitPanel);
 		
@@ -152,8 +144,10 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 				+ d);
 		
 		size = this.getSize();
-		if(player.isSetMediaView()) player.changeSizeMediaView();
 	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {}
 
 	public static void main(String[] args) {
 		final PlayerFrame frame = new PlayerFrame();
@@ -168,7 +162,4 @@ public class PlayerFrame extends JFrame implements ComponentListener {
 			}
 		});
 	}
-
-	@Override
-	public void componentShown(ComponentEvent e) {}
 }
